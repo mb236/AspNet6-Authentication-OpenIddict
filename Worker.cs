@@ -59,7 +59,7 @@ namespace identity_angular
                             Permissions.Scopes.Email,
                             Permissions.Scopes.Profile,
                             Permissions.Scopes.Roles,
-                            Permissions.Prefixes.Scope + "dataEventRecords"
+                            //Permissions.Prefixes.Scope + "dataEventRecords"
                         },
                         Requirements =
                         {

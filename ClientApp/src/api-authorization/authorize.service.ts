@@ -174,25 +174,14 @@ export class AuthorizeService {
       return;
     }
 
-    // const response = await fetch(ApplicationPaths.ApiAuthorizationClientConfigurationUrl);
-    // if (!response.ok) {
-    //   throw new Error(`Could not load settings for '${ApplicationName}'`);
-    // }
-
-    // const settings: any = await response.json();
-    // settings.automaticSilentRenew = true;
-    // settings.includeIdTokenInSilentRenew = true;
-    const settings: UserManagerSettings = {
-      authority: 'https://localhost:44409',
-      client_id: "identity_angular",
-      redirect_uri: "https://localhost:44409/authentication/login-callback",
-      post_logout_redirect_uri: "https://localhost:44409/authentication/logout-callback",
-      response_type: "code",
-      scope: "openid profile",
-      automaticSilentRenew: true,
-      includeIdTokenInSilentRenew: true,
-      monitorSession: true
+    const response = await fetch(ApplicationPaths.ApiAuthorizationClientConfigurationUrl);
+    if (!response.ok) {
+      throw new Error(`Could not load settings for '${ApplicationName}'`);
     }
+
+    const settings: any = await response.json();
+    settings.automaticSilentRenew = true;
+    settings.includeIdTokenInSilentRenew = true;
     this.userManager = new UserManager(settings);
 
     this.userManager.events.addUserSignedOut(async () => {

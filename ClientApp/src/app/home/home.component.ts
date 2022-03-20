@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { AuthorizeService } from 'src/api-authorization/authorize.service';
 
 @Component({
@@ -7,12 +7,12 @@ import { AuthorizeService } from 'src/api-authorization/authorize.service';
   templateUrl: './home.component.html',
 })
 export class HomeComponent implements OnInit {
-  constructor(private route: ActivatedRoute, private authorizatService: AuthorizeService) { }
+  constructor(private route: ActivatedRoute, private router: Router) { }
   ngOnInit(): void {
     this.route.queryParams.subscribe(params => {
-      if(params['logout'] == 1){
-        this.authorizatService.signOut({});
+      if (params['logout']) {
+        this.router.navigateByUrl("/authentication/logout", { state: { local: true } })
       }
     })
-  }  
+  }
 }
